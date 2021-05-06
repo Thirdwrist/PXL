@@ -8,7 +8,6 @@ use App\Models\Import;
 use App\Repositories\CreditCardRepository;
 use App\Repositories\ImportRepository;
 use App\Repositories\UserRepository;
-use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
@@ -55,7 +54,7 @@ class ImportUserJSONService implements ImportInterface
                 'address'=> Arr::get($record, 'address'),
                 'description'=> Arr::get($record, 'description'),
                 'interest'=> Arr::get($record, 'interest'),
-                'date_of_birth'=> $this->sanitizeDate(Arr::get($record, 'date_of_birth')),
+                'date_of_birth'=> sanitizeDate(Arr::get($record, 'date_of_birth')),
                 'account'=> Arr::get($record, 'account'),
                 'checked'=> Arr::get($record, 'checked')
             ]);
@@ -65,7 +64,7 @@ class ImportUserJSONService implements ImportInterface
                'name'=> Arr::get($record, 'creditCard.name'),
                'type'=> Arr::get($record, 'creditCard.type'),
                'number'=>  Arr::get($record, 'creditCard.number'),
-               'expiration_date'=>  $this->sanitizeDate(Arr::get($record, 'creditCard.expirationDate')),
+               'expiration_date'=>  sanitizeDate(Arr::get($record, 'creditCard.expirationDate')),
                 'user_id'=> $user->id
             ]);
 
@@ -97,17 +96,6 @@ class ImportUserJSONService implements ImportInterface
         }
 
         abort(500, 'storage format not supported');
-    }
-
-    private function sanitizeDate($date)
-    {
-        if($date)
-        {
-            $explode = explode('/', $date);
-            return Carbon::parse(implode('-', $explode))->format('Y-m-d');
-        }
-
-        return $date;
     }
 
 }
