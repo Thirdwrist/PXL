@@ -13,22 +13,22 @@ class ImportRecordsCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'import:records {--id=}';
+    protected string $signature = 'import:records {--id=}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'import new set of records into the db';
+    protected string $description = 'import new set of records into the db';
 
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    protected $importService;
-    protected $importRepository;
+    protected ImportUserJSONService $importService;
+    protected ImportRepository $importRepository;
 
     public function __construct(ImportUserJSONService $importUserJSONService, ImportRepository $importRepository)
     {
@@ -69,8 +69,8 @@ class ImportRecordsCommand extends Command
        $this->info('specify the ID from the table listed below  as an argument to this command');
        $this->line('...............');
        $this->table(
-           ['id', 'name', 'status', 'current_index', 'total_count'],
-           $this->importRepository->list(['id', 'name', 'status', 'current_index', 'total_count'])
+           $columns = ['id', 'name', 'status', 'current_index', 'total_count', 'storage_disk', 'file_format', 'path'],
+           $this->importRepository->list($columns)
        );
    }
 }

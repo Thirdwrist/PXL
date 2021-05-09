@@ -6,7 +6,7 @@ namespace App\Services\Import;
 
 use App\Models\Import;
 
-class ImportUserCSVService extends BaseImport
+class ImportUserXMLService extends BaseImport
 {
 
     function getFile(Import $import): array

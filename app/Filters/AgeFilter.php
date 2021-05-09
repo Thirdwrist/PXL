@@ -6,7 +6,7 @@ namespace App\Filters;
 
 use Illuminate\Support\Arr;
 
-class AgeFilter extends BaseFilter
+class AgeFilter implements BaseFilter
 {
     protected array $data;
 
@@ -15,7 +15,7 @@ class AgeFilter extends BaseFilter
        $this->data = $data;
     }
 
-    public function run(): bool
+    public function handle(): bool
     {
         $dob = Arr::get($this->data, 'date_of_birth');
         if($dob === null)

@@ -17,21 +17,21 @@ class CreateImportCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'import:new';
+    protected string $signature = 'import:new';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new import instance record';
+    protected string $description = 'Create a new import instance record';
 
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    private $importRepository;
+    private ImportRepository $importRepository;
     public function __construct(ImportRepository $importRepository)
     {
         parent::__construct();
@@ -44,6 +44,31 @@ class CreateImportCommand extends Command
      * @return int
      */
     public function handle()
+    {
+
+        $this->createImportWizard();
+
+        return 0;
+
+    }
+
+    private function createImport($name, $description, $location, $format,$path, $contents)
+    {
+       return $this->importRepository->store([
+            'name'=> $name,
+            'description'=> $description,
+            'storage_disk'=> $location,
+            'file_format'=> $format,
+            'path'=> $path,
+            'total_count'=> count($contents),
+            'current_index'=> 0,
+            'slug'=> Str::slug($name, '_') . uniqid('_'),
+           'status'=>Config::get('constants.import.status.pending')
+        ]);
+
+    }
+
+    private function createImportWizard()
     {
         $format = $this->choice('Kindly select file format', ['JSON']);
         $name = $this->ask('what is the name of the file you wish to import?');
@@ -75,24 +100,5 @@ class CreateImportCommand extends Command
         $import = $this->createImport($name, $description, $location, $format, $path, $contents);
 
         $this->info("{$import->name} created with a unique identifier {$import->slug}");
-
-        return 0;
-
-    }
-
-    private function createImport($name, $description, $location, $format,$path, $contents)
-    {
-       return $this->importRepository->store([
-            'name'=> $name,
-            'description'=> $description,
-            'storage_disk'=> $location,
-            'file_format'=> $format,
-            'path'=> $path,
-            'total_count'=> count($contents),
-            'current_index'=> 0,
-            'slug'=> Str::slug($name, '_') . uniqid('_'),
-           'status'=>Config::get('constants.import.status.pending')
-        ]);
-
     }
 }

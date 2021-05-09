@@ -4,9 +4,9 @@
 namespace App\Filters;
 
 
-abstract class BaseFilter{
+interface BaseFilter{
 
-    abstract function __construct(array $data);
+    public function __construct(array $data);
 
-    abstract function run():bool;
+    public function handle():bool;
 }
