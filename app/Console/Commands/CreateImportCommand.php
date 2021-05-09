@@ -41,14 +41,11 @@ class CreateImportCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return int
      */
     public function handle()
     {
 
         $this->createImportWizard();
-
-        return 0;
 
     }
 
