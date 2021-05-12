@@ -13,8 +13,9 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
-abstract class BaseImport
+final class ImportManager
 {
+
     protected ImportRepository $importRepository;
     protected UserRepository $userRepository;
     protected CreditCardRepository $creditCardRepository;
@@ -27,15 +28,10 @@ abstract class BaseImport
         $this->creditCardRepository = $creditCardRepository;
     }
 
-    // get the file
-    abstract function getFile(Import $import) :array;
-
-    public function import(Import $import) :void
+    public function import(Import $import, $file) :void
     {
         if($import->status === Config::get('constants.import.status.completed'))
             return;
-
-        $file = collect($this->getFile($import));
         $this->importRepository->updateStatus($import, Config::get('constants.import.status.in_progress'));
 
         for ($key=$import->current_index; $key < $import->total_count; $key++)
@@ -52,28 +48,28 @@ abstract class BaseImport
             DB::beginTransaction();
 
 
-          if($this->filters($record)) {
-              // Create user
-              $user = $this->userRepository->store([
-                  'name' => Arr::get($record, 'name'),
-                  'email' => Arr::get($record, 'email'),
-                  'address' => Arr::get($record, 'address'),
-                  'description' => Arr::get($record, 'description'),
-                  'interest' => Arr::get($record, 'interest'),
-                  'date_of_birth' => sanitizeDate(Arr::get($record, 'date_of_birth')),
-                  'account' => Arr::get($record, 'account'),
-                  'checked' => Arr::get($record, 'checked')
-              ]);
+            if($this->filters($record)) {
+                // Create user
+                $user = $this->userRepository->store([
+                    'name' => Arr::get($record, 'name'),
+                    'email' => Arr::get($record, 'email'),
+                    'address' => Arr::get($record, 'address'),
+                    'description' => Arr::get($record, 'description'),
+                    'interest' => Arr::get($record, 'interest'),
+                    'date_of_birth' => sanitizeDate(Arr::get($record, 'date_of_birth')),
+                    'account' => Arr::get($record, 'account'),
+                    'checked' => Arr::get($record, 'checked')
+                ]);
 
-              // Create credit card
-              $this->creditCardRepository->store([
-                  'name' => Arr::get($record, 'creditCard.name'),
-                  'type' => Arr::get($record, 'creditCard.type'),
-                  'number' => Arr::get($record, 'creditCard.number'),
-                  'expiration_date' => sanitizeDate(Arr::get($record, 'creditCard.expirationDate')),
-                  'user_id' => $user->id
-              ]);
-          }
+                // Create credit card
+                $this->creditCardRepository->store([
+                    'name' => Arr::get($record, 'creditCard.name'),
+                    'type' => Arr::get($record, 'creditCard.type'),
+                    'number' => Arr::get($record, 'creditCard.number'),
+                    'expiration_date' => sanitizeDate(Arr::get($record, 'creditCard.expirationDate')),
+                    'user_id' => $user->id
+                ]);
+            }
 
             // update index
             $this->importRepository->updateImport(
@@ -96,10 +92,15 @@ abstract class BaseImport
         {
             $res = (new $filter($data))->handle();
             if(!$res)
-                    return $res;
+                return $res;
         }
 
         return true;
+    }
+
+    public function setFilters(array $filters):void
+    {
+       $this->filters = array_merge($this->filters, $filters);
     }
 
 }

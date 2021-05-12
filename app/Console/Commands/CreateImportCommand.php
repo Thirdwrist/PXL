@@ -2,13 +2,13 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Import;
 use App\Repositories\ImportRepository;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-
 
 class CreateImportCommand extends Command
 {
@@ -17,14 +17,14 @@ class CreateImportCommand extends Command
      *
      * @var string
      */
-    protected string $signature = 'import:new';
+    protected $signature = 'import:new {--storage=local}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected string $description = 'Create a new import instance record';
+    protected  $description = 'Create a new import instance record';
 
     /**
      * Create a new command instance.
@@ -32,6 +32,7 @@ class CreateImportCommand extends Command
      * @return void
      */
     private ImportRepository $importRepository;
+
     public function __construct(ImportRepository $importRepository)
     {
         parent::__construct();
@@ -42,16 +43,57 @@ class CreateImportCommand extends Command
      * Execute the console command.
      *
      */
-    public function handle()
+    public function handle():void
     {
+        $diskKeys = array_keys(Config::get('filesystems.disks'));
+        if(!in_array($this->option('storage'), $diskKeys))
+        {
+            $this->error('the selected Storage location disk does not exist');
+            die;
+        }
 
+        // Run wizard
         $this->createImportWizard();
 
     }
 
-    private function createImport($name, $description, $location, $format,$path, $contents)
+    private function createImportWizard():void
     {
-       return $this->importRepository->store([
+        $location = $this->option('storage');
+        $types = Config::get('constants.import.types');
+        $format = $this->choice('Kindly select file format', array_keys($types));
+        $name = $this->ask('what is the name of the file you wish to import?');
+        $description = $this->ask('Please input file description');
+
+        if($location === 'url')
+        {
+            $path = $this->ask('input a valid url to the resource (e.g www.google.com/jsonfile.json)');
+            $file = Http::get($path);
+
+        }else{
+            $path = $this->ask('Input Storage path (e.g public/profiles/new_jsonFile.json)');
+            $exists = Storage::disk('local')->exists($path);
+            if(!$exists){
+                $this->error('The supplied document path does not exist');
+                die;
+            }
+            $file = Storage::disk($location)->get($path);
+        }
+
+        // Instantiate selected Strategy
+        $strategy = app()->make($types[$format]);
+        // Use strategy to convert data to array
+        $contentsToArray = $strategy->convertData($file);
+
+        // create Import model
+        $import = $this->createImport($name, $description, $location, $format, $path, $contentsToArray);
+
+        $this->info("{$import->name} created with a unique identifier {$import->slug}");
+    }
+
+    private function createImport($name, $description, $location, $format,$path, $contents):Import
+    {
+        return $this->importRepository->store([
             'name'=> $name,
             'description'=> $description,
             'storage_disk'=> $location,
@@ -60,42 +102,8 @@ class CreateImportCommand extends Command
             'total_count'=> count($contents),
             'current_index'=> 0,
             'slug'=> Str::slug($name, '_') . uniqid('_'),
-           'status'=>Config::get('constants.import.status.pending')
+            'status'=>Config::get('constants.import.status.pending')
         ]);
 
-    }
-
-    private function createImportWizard()
-    {
-        $format = $this->choice('Kindly select file format', ['JSON']);
-        $name = $this->ask('what is the name of the file you wish to import?');
-        $description = $this->ask('Please input file description');
-        $location = $this->choice(
-            'where is the file located?',
-            [Config::get('constants.import.storage.local'), Config::get('constants.import.storage.url')]
-        );
-
-        if($location === Config::get('constants.import.storage.local'))
-        {
-            $path = $this->ask('Input Storage path (e.g public/profiles/new_jsonFile.json)');
-            $exists = Storage::disk('local')->exists($path);
-            if(!$exists){
-                $this->error('The supplied document path does not exist');
-            }
-            $contents = Storage::disk('local')->get($path);
-            $contents = json_decode($contents, true);
-        }elseif(Config::get('constants.import.storage.url') === $location){
-            $path = $this->ask('input a valid url to the resource (e.g www.google.com/jsonfile.json)');
-            $contents = Http::get($path);
-            if($contents->ok() && count($contents->json()) < 1)
-            {
-                $this->error('The json file url is invalid or empty');
-            }
-        }
-
-
-        $import = $this->createImport($name, $description, $location, $format, $path, $contents);
-
-        $this->info("{$import->name} created with a unique identifier {$import->slug}");
     }
 }

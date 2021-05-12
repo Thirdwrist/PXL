@@ -2,9 +2,12 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Import;
 use App\Repositories\ImportRepository;
-use App\Services\Import\ImportUserJSONService;
+use App\Services\Import\ImportManager;
+use App\Services\Import\ImportService;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Config;
 
 class ImportRecordsCommand extends Command
 {
@@ -13,27 +16,30 @@ class ImportRecordsCommand extends Command
      *
      * @var string
      */
-    protected string $signature = 'import:records {--id=}';
+    protected $signature = 'import:records {type} {--id=}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected string $description = 'import new set of records into the db';
+    protected $description = 'import new set of records into the db';
 
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    protected ImportUserJSONService $importService;
     protected ImportRepository $importRepository;
+    protected ImportManager $importManager;
 
-    public function __construct(ImportUserJSONService $importUserJSONService, ImportRepository $importRepository)
+    // Laravel queue by default handles SIGTERM and other interruptions
+    protected $queue = 'import';
+
+    public function __construct(ImportRepository $importRepository, ImportManager $importManager)
     {
-        $this->importService = $importUserJSONService;
         $this->importRepository = $importRepository;
+        $this->importManager = $importManager;
         parent::__construct();
     }
 
@@ -41,15 +47,27 @@ class ImportRecordsCommand extends Command
      * Execute the console command.
      *
      */
-    public function handle()
+    public function handle():void
     {
-        if($id = $this->option('id'))
-            $this->importRecords($id);
-        else
-            $this->instructions();
+        $allTypes = Config::get('constants.import.types');
+        $type = $this->argument('type');
+
+        if(in_array($type, array_keys($allTypes)))
+        {
+            $strategy =  app()->make($allTypes[$type]);
+            $service = new ImportService($strategy, $this->importManager);
+
+            if($id = $this->option('id'))
+                $service->run($this->getImport($id));
+            else
+                $this->instructions();
+        }else{
+            $this->error('invalid format supplied');
+            die;
+        }
     }
 
-    public function importRecords(int $id)
+    public function getImport(int $id):Import
     {
         $import = $this->importRepository->getById($id);
         if(!$import)
@@ -58,10 +76,11 @@ class ImportRecordsCommand extends Command
             die;
         }
 
-        $this->importService->import($import);
+        return $import;
+
     }
 
-   private function instructions()
+   private function instructions() :void
    {
        $this->info('kindly select what import you would want to upload');
        $this->line('...............');
