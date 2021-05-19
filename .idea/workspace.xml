@@ -2,22 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b448cdd3-aab5-4153-a117-01b46d48c63c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Services/Import/BaseService.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Services/Import/ImportCSVStrategy.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Services/Import/ImportManager.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Services/Import/ImportService.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Services/Import/ImportStrategy.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Console/Commands/CreateImportCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Commands/CreateImportCommand.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Console/Commands/ImportRecordsCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Commands/ImportRecordsCommand.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Services/Import/BaseImport.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Services/Import/ImportUserCSVService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/Import/ImportJSONStrategy.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Services/Import/ImportUserJSONService.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Services/Import/ImportUserXMLService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/Import/ImportXMLStrategy.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/constants.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/constants.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/filesystems.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/filesystems.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,8 +22,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Services/Import/ImportService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="19" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="304">
+              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
               <folding>
                 <element signature="e#41#76#0#PHP" expanded="true" />
               </folding>
@@ -48,7 +34,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Services/Import/BaseService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
+            <state relative-caret-position="152">
               <caret line="9" column="10" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
               <folding>
                 <element signature="e#41#63#0#PHP" expanded="true" />
@@ -60,7 +46,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Services/Import/ImportJSONStrategy.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
+            <state relative-caret-position="285">
               <caret line="17" column="48" selection-start-line="17" selection-start-column="48" selection-end-line="17" selection-end-column="48" />
               <folding>
                 <element signature="e#41#76#0#PHP" expanded="true" />
@@ -69,10 +55,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Services/Import/ImportManager.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-540">
+            <state relative-caret-position="152">
               <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
               <folding>
                 <element signature="e#41#76#0#PHP" expanded="true" />
@@ -94,7 +80,7 @@
         <entry file="file://$PROJECT_DIR$/app/Filters/AgeFilter.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="342">
-              <caret line="18" column="5" lean-forward="true" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+              <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -120,7 +106,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Console/Commands/ImportRecordsCommand.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-297">
+            <state relative-caret-position="570">
               <caret line="35" column="71" selection-start-line="35" selection-start-column="71" selection-end-line="35" selection-end-column="71" />
               <folding>
                 <element signature="e#40#62#0#PHP" expanded="true" />
@@ -129,12 +115,12 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="57">
-                <caret line="3" column="10" lean-forward="true" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
+              <first_editor>
+                <caret column="19" selection-start-column="19" selection-end-column="19" />
               </first_editor>
               <second_editor />
             </state>
@@ -313,7 +299,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -386,6 +371,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -426,12 +412,13 @@
       <option name="presentableId" value="Default" />
       <updated>1619993884480</updated>
       <workItem from="1619993889753" duration="33823000" />
-      <workItem from="1620391030655" duration="32080000" />
+      <workItem from="1620391030655" duration="32992000" />
+      <workItem from="1621214974503" duration="268000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65903000" />
+    <option name="totallyTimeSpent" value="67083000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -443,10 +430,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25178826" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14110756" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -465,7 +452,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="right" id="Terminal" order="4" visible="true" weight="0.1988555" />
+      <window_info active="true" anchor="right" id="Terminal" order="4" visible="true" weight="0.10969116" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -772,38 +759,55 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Services/Import/ImportService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        <state relative-caret-position="304">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
           <folding>
             <element signature="e#41#76#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Console/Commands/ImportRecordsCommand.php">
+    <entry file="file://$PROJECT_DIR$/app/Services/Import/BaseService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-297">
-          <caret line="35" column="71" selection-start-line="35" selection-start-column="71" selection-end-line="35" selection-end-column="71" />
+        <state relative-caret-position="152">
+          <caret line="9" column="10" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
           <folding>
-            <element signature="e#40#62#0#PHP" expanded="true" />
+            <element signature="e#41#63#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="57">
-            <caret line="3" column="10" lean-forward="true" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
-          </first_editor>
-          <second_editor />
+    <entry file="file://$PROJECT_DIR$/app/Services/Import/ImportJSONStrategy.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="17" column="48" selection-start-line="17" selection-start-column="48" selection-end-line="17" selection-end-column="48" />
+          <folding>
+            <element signature="e#41#76#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Services/Import/ImportManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+          <folding>
+            <element signature="e#41#76#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Services/Import/ImportCSVStrategy.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Filters/AgeFilter.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
-          <caret line="18" column="5" lean-forward="true" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+          <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -821,40 +825,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Services/Import/BaseService.php">
+    <entry file="file://$PROJECT_DIR$/app/Console/Commands/ImportRecordsCommand.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="10" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
+        <state relative-caret-position="570">
+          <caret line="35" column="71" selection-start-line="35" selection-start-column="71" selection-end-line="35" selection-end-column="71" />
           <folding>
-            <element signature="e#41#63#0#PHP" expanded="true" />
+            <element signature="e#40#62#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Services/Import/ImportCSVStrategy.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Services/Import/ImportJSONStrategy.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="48" selection-start-line="17" selection-start-column="48" selection-end-line="17" selection-end-column="48" />
-          <folding>
-            <element signature="e#41#76#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Services/Import/ImportManager.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-540">
-          <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
-          <folding>
-            <element signature="e#41#76#0#PHP" expanded="true" />
-          </folding>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor>
+            <caret column="19" selection-start-column="19" selection-end-column="19" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
